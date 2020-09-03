@@ -178,4 +178,6 @@ let clearTimesBtn = document.querySelector('#clearTimes');
 clearTimesBtn.addEventListener('click', function () {
     timeElapsed.innerHTML = '';
     averageTime.innerHTML = 'Your average time is: '
+    runs = 0;
+    cumulative = 0;
 })
