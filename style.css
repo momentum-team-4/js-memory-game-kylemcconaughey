@@ -3,6 +3,7 @@
     width: 100%;
     margin: 0;
     padding: 0;
+    font-family: monospace;
 }
 
 body {
@@ -37,3 +38,18 @@ img {
     display: none;
 }
 
+.clearBtn {
+    width: 25%;
+    height: 50px;
+    background-color: lightcoral;
+    border: outset 0.5rem;
+    font-size: 1.5rem;
+}
+
+.resetBtn {
+    width: 25%;
+    height: 50px;
+    background-color: honeydew;
+    border: outset 0.5rem;
+    font-size: 1.5rem;
+}

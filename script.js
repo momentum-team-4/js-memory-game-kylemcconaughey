@@ -44,11 +44,20 @@ const dropdown = document.querySelector('#dropdown');
 let records = document.querySelector('#records');
 let leaderboard = document.querySelector('#leaderboard');
 let cardContainer = document.querySelector('#cardContainer');
-
+let startTime;
+let endTime;
+let timeElapsed = document.querySelector('#timeElapsed');
 
 window.addEventListener('load', function () {
     displayCards(deck)
 })
+
+function start() {
+    if (startTime === undefined) {
+        startTime = moment()
+        console.log(startTime)
+    }
+}
 
 
 function shuffleCards(deck) {
@@ -82,74 +91,77 @@ function makeCard(x) {
     cardAnimal.classList.add('cardAnimal');
     cardAnimal.style.display = 'none';
     card.appendChild(cardAnimal);
+    card.addEventListener('click', start);
     card.addEventListener('click', function () {
         flipCard(cardFront)
     })
 
 }
 
+let clearBtn = document.querySelector('#clearBtn');
+clearBtn.addEventListener('click', function () {
+    let temp = document.querySelectorAll('.faceup');
+    temp.forEach(el => {
+        el.classList.toggle('faceup')
+        el.classList.toggle('facedown')
+    })
+})
+
+let resetBtn = document.querySelector('#resetBtn')
+resetBtn.addEventListener('click', function () {
+    let temp = document.querySelectorAll('.solved');
+    temp.forEach(el => {
+        el.classList.toggle('faceup')
+        el.classList.toggle('facedown')
+        el.classList.toggle('solved')
+    })
+    startTime = '';
+})
+
+let cardUp = '';
 
 function flipCard(card) {
-    let cardsUp = document.querySelectorAll('.faceup');
-    if (cardsUp.length === 0) {
-        //flip card
-    } else if (cardsUp.length === 1) {
-        //if card is up, turn it face down
-        //else, flip card face up
-        //check against other card that's up
-        //if they both match, let user know, make them un-clickable
-
+    if (!card.classList.contains('solved')) {
+        let cardsUp = document.querySelectorAll('.faceup');
+        if (cardsUp.length === 0) {
+            //flip card
+            card.classList.toggle('faceup')
+            card.classList.toggle('facedown')
+            cardUp = card.src
+            console.log(cardUp)
+        } else if (cardsUp.length === 1) {
+            //if card is up, turn it face down
+            if (card.classList.contains('faceup')) {
+                card.classList.toggle('faceup')
+                card.classList.toggle('facedown')
+            } else {
+                card.classList.toggle('faceup')
+                card.classList.toggle('facedown')
+                if (cardUp === card.src) {
+                    console.log('match!')
+                    let temp = document.querySelectorAll('.faceup');
+                    temp.forEach(el => {
+                        el.classList.toggle('faceup')
+                        el.classList.toggle('solved')
+                    })
+                    let down = document.querySelectorAll('.facedown').length;
+                    if (down === 0) {
+                        endTime = moment();
+                        console.log(endTime)
+                        timeElapsed.innerHTML = (endTime - startTime) / 1000
+                    }
+                }
+                else {
+                    console.log('try again')
+                }
+            }
+            //else, flip card face up
+            //check against other card that's up
+            //if they both match, let user know, make them un-clickable
+            //if they don't match, click anywhere to flip them back down
+        }
     }
 }
-
-
-
-
-
-
-// let faceUp = 0;
-
-// function flipCard(cf) {
-//     if (!(cf.classList.contains('solved'))) {
-//         if (faceUp === 0) {
-//             console.log('faceup === 0');
-//             cf.classList.toggle('facedown');
-//             cf.classList.toggle('faceup');
-//             faceUp += 1;
-//             console.log('cf.src: ' + cf.src)
-
-//             console.log('card1: ' + card1 + ' and faceUp: ' + faceUp)
-//         } else if (faceUp === 1) {
-//             let card1 = document.querySelector('.faceup');
-//             if (cf.src === card1.src) {
-//                 console.log('match!')
-//                 card1.classList.toggle('faceup');
-//                 card1.classList.add('solved');
-//                 cf.classList.toggle('facedown');
-//                 cf.classList.toggle('faceup');
-//                 cf.classList.add('solved');
-//                 faceUp = 0;
-//             } else {
-//                 cf.classList.toggle('facedown');
-//                 cf.classList.toggle('faceup');
-//                 faceUp += 1;
-//                 console.log(faceUp);
-//             }
-//         } else if (faceUp === 2) {
-//             let temp = document.querySelectorAll('.faceup');
-//             temp.forEach(el => {
-//                 el.classList.toggle('faceup')
-//                 el.classList.toggle('facedown')
-//             })
-//             cf.classList.toggle('facedown');
-//             cf.classList.toggle('faceup');
-//             faceUp = 1;
-//         }
-//     }
-// }
-
-
-
 
 
 function displayCards(deck) {
@@ -159,12 +171,6 @@ function displayCards(deck) {
     })
 }
 
-
-// - when the game started
-
-// cardContainer.addEventListener('click', function () {
-//     startTimer()
-// })
 
 
 // - listen for clicks on the cards
