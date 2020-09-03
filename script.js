@@ -86,7 +86,6 @@ function makeCard(x) {
     // card.appendChild(cardBack);
     cardContainer.appendChild(card);
     cardFront.classList.add('facedown');
-    cardFront.classList.add('unsolved');
     cardAnimal.innerHTML = x.animal;
     cardAnimal.classList.add('cardAnimal');
     cardAnimal.style.display = 'none';
@@ -109,13 +108,18 @@ clearBtn.addEventListener('click', function () {
 
 let resetBtn = document.querySelector('#resetBtn')
 resetBtn.addEventListener('click', function () {
-    let temp = document.querySelectorAll('.solved');
+    console.log('resetbtn clicked')
+    let temp = document.querySelectorAll('.solved', '.faceup');
+    console.log(temp)
     temp.forEach(el => {
-        el.classList.toggle('faceup')
-        el.classList.toggle('facedown')
-        el.classList.toggle('solved')
+        el.classList.remove('faceup', 'solved')
+        el.classList.add('facedown')
+        // el.classList.remove('')
     })
     startTime = '';
+    endTime = '';
+    cardContainer.innerHTML = '';
+    displayCards(deck);
 })
 
 let cardUp = '';
@@ -142,13 +146,13 @@ function flipCard(card) {
                     let temp = document.querySelectorAll('.faceup');
                     temp.forEach(el => {
                         el.classList.toggle('faceup')
-                        el.classList.toggle('solved')
+                        el.classList.add('solved')
                     })
                     let down = document.querySelectorAll('.facedown').length;
                     if (down === 0) {
                         endTime = moment();
                         console.log(endTime)
-                        timeElapsed.innerHTML = (endTime - startTime) / 1000
+                        timeElapsed.innerHTML += 'Your time was: ' + ((endTime - startTime) / 1000) + ' |  '
                     }
                 }
                 else {
