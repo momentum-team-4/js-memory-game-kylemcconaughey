@@ -17,14 +17,13 @@ body {
 .cardContainer {
     display: flex;
     flex-flow: wrap;
-
+    margin-right: 0;
 }
 .card {
-    width: 22%;
+    width: 20%;
     height: 200px;
     margin: 1rem;
     background-color: red;
-
 }
 
 img {
