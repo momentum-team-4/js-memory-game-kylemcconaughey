@@ -6,6 +6,9 @@ let cardContainer = document.querySelector('#cardContainer');
 let startTime;
 let endTime;
 let timeElapsed = document.querySelector('#timeElapsed');
+let averageTime = document.querySelector('#average');
+let runs = 0;
+let cumulative = 0;
 
 window.addEventListener('load', function () {
     displayCards(deck12)
@@ -121,7 +124,13 @@ function flipCard(card) {
                     if (down === 0) {
                         endTime = moment();
                         console.log(endTime)
-                        timeElapsed.innerHTML += 'Your time was: ' + ((endTime - startTime) / 1000) + ' |  '
+                        timeElapsed.innerHTML += 'Your time was: ' + ((endTime - startTime) / 1000) + ' |  ';
+                        runs += 1;
+                        console.log(runs)
+                        cumulative += ((endTime - startTime) / 1000)
+                        console.log(cumulative)
+                        averageTime.innerHTML = 'Your average time is: ' + cumulative / runs;
+                        console.log(cumulative / runs)
                     }
                 }
                 else {
@@ -167,5 +176,5 @@ dropdown.addEventListener('input', function () {
 
 let clearTimesBtn = document.querySelector('#clearTimes');
 clearTimesBtn.addEventListener('click', function () {
-    timeElapsed.innerHTML = '';
+    timeElapsed.innerHTML = 'Your average time is:';
 })

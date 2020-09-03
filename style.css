@@ -72,3 +72,8 @@ button:focus {
     outline: 0;
     box-shadow: inset 0px 0px 15px #232c33ff;
 }
+
+#average {
+    font-size: 3rem;
+    text-align: center;
+}
