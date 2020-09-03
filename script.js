@@ -176,5 +176,6 @@ dropdown.addEventListener('input', function () {
 
 let clearTimesBtn = document.querySelector('#clearTimes');
 clearTimesBtn.addEventListener('click', function () {
-    timeElapsed.innerHTML = 'Your average time is:';
+    timeElapsed.innerHTML = '';
+    averageTime.innerHTML = 'Your average time is: '
 })
