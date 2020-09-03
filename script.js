@@ -116,8 +116,8 @@ resetBtn.addEventListener('click', function () {
         el.classList.add('facedown')
         // el.classList.remove('')
     })
-    startTime = '';
-    endTime = '';
+    startTime = undefined;
+    endTime = undefined;
     cardContainer.innerHTML = '';
     displayCards(deck);
 })
