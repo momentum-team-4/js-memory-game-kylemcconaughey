@@ -1,6 +1,5 @@
 
 let timer = document.querySelector('#timer');
-const dropdown = document.querySelector('#dropdown');
 let records = document.querySelector('#records');
 let leaderboard = document.querySelector('#leaderboard');
 let cardContainer = document.querySelector('#cardContainer');
@@ -66,19 +65,32 @@ clearBtn.addEventListener('click', function () {
     })
 })
 
+function set() {
+    console.log('set called')
+    if (dropdown.value === '1') {
+        console.log(dropdown.value)
+        displayCards(deck12)
+    } else if (dropdown.value === '2') {
+        console.log(dropdown.value)
+        displayCards(deck16)
+    } else if (dropdown.value === '3') {
+        console.log(dropdown.value)
+        displayCards(deck20)
+    }
+}
+
 let resetBtn = document.querySelector('#resetBtn')
 resetBtn.addEventListener('click', function () {
     console.log('resetbtn clicked')
     let temp = document.querySelectorAll('.solved', '.faceup');
-    console.log(temp)
+    console.log('temp: ' + temp)
     temp.forEach(el => {
         el.classList.remove('faceup', 'solved')
         el.classList.add('facedown')
-        // el.classList.remove('')
     })
     startTime = undefined;
     endTime = undefined;
-    displayCards(deck12);
+    set()
 })
 
 let cardUp = '';
@@ -87,13 +99,11 @@ function flipCard(card) {
     if (!card.classList.contains('solved')) {
         let cardsUp = document.querySelectorAll('.faceup');
         if (cardsUp.length === 0) {
-            //flip card
             card.classList.toggle('faceup')
             card.classList.toggle('facedown')
             cardUp = card.src
             console.log(cardUp)
         } else if (cardsUp.length === 1) {
-            //if card is up, turn it face down
             if (card.classList.contains('faceup')) {
                 card.classList.toggle('faceup')
                 card.classList.toggle('facedown')
@@ -116,16 +126,19 @@ function flipCard(card) {
                 }
                 else {
                     console.log('try again')
+                    let temp = document.querySelectorAll('.faceup');
+                    setTimeout(() => {
+                        console.log('timoeut')
+                        temp.forEach(el => {
+                            el.classList.toggle('faceup')
+                            el.classList.toggle('facedown')
+                        })
+                    }, 1000)
                 }
             }
-            //else, flip card face up
-            //check against other card that's up
-            //if they both match, let user know, make them un-clickable
-            //if they don't match, click anywhere to flip them back down
         }
     }
 }
-
 
 function displayCards(deck) {
     let x = shuffleCards(deck);
@@ -134,3 +147,25 @@ function displayCards(deck) {
         makeCard(cd)
     })
 }
+
+const dropdown = document.querySelector('#dropdown');
+
+dropdown.addEventListener('input', function () {
+    console.log(dropdown.value)
+    if (dropdown.value === 1) {
+        displayCards(deck12)
+        console.log('value1')
+    } else if (dropdown.value === 2) {
+        displayCards(deck16)
+        console.log('value2')
+    } else if (dropdown.value === 3) {
+        displayCards(deck20)
+        console.log('value3')
+    }
+
+})
+
+let clearTimesBtn = document.querySelector('#clearTimes');
+clearTimesBtn.addEventListener('click', function () {
+    timeElapsed.innerHTML = '';
+})
