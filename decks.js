@@ -1,4 +1,4 @@
-const deck = [
+const deck12 = [
     {
         animal: 'eagle', picSource: 'cardPics/eagle.jpg'
     },
@@ -35,16 +35,5 @@ const deck = [
     {
         animal: 'giraffe', picSource: 'cardPics/jraff.jpg'
     }
+
 ]
-
-const dropdown = document.querySelector('#dropdown');
-const cardContainer = document.querySelectorAll('#cardContainer');
-
-dropdown.addEventListener('input', function () {
-    cardContainer.innerHTML = '';
-    let difLevel = dropdown.value;
-    if (difLevel === 1) {
-
-    }
-})
-

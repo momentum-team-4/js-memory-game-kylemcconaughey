@@ -1,44 +1,4 @@
-// ## data
 
-const deck = [
-    {
-        animal: 'eagle', picSource: 'cardPics/eagle.jpg'
-    },
-    {
-        animal: 'eagle', picSource: 'cardPics/eagle.jpg'
-    },
-    {
-        animal: 'flamingo', picSource: 'cardPics/flamingo.jpg'
-    },
-    {
-        animal: 'flamingo', picSource: 'cardPics/flamingo.jpg'
-    },
-    {
-        animal: 'horse', picSource: 'cardPics/horsey.jpg'
-    },
-    {
-        animal: 'horse', picSource: 'cardPics/horsey.jpg'
-    },
-    {
-        animal: 'iguana', picSource: 'cardPics/iguano.jpg'
-    },
-    {
-        animal: 'iguana', picSource: 'cardPics/iguano.jpg'
-    },
-    {
-        animal: 'turtle', picSource: 'cardPics/iLikeTurtles.jpg'
-    },
-    {
-        animal: 'turtle', picSource: 'cardPics/iLikeTurtles.jpg'
-    },
-    {
-        animal: 'giraffe', picSource: 'cardPics/jraff.jpg'
-    },
-    {
-        animal: 'giraffe', picSource: 'cardPics/jraff.jpg'
-    }
-
-]
 let timer = document.querySelector('#timer');
 const dropdown = document.querySelector('#dropdown');
 let records = document.querySelector('#records');
@@ -49,7 +9,7 @@ let endTime;
 let timeElapsed = document.querySelector('#timeElapsed');
 
 window.addEventListener('load', function () {
-    displayCards(deck)
+    displayCards(deck12)
 })
 
 function start() {
@@ -118,8 +78,7 @@ resetBtn.addEventListener('click', function () {
     })
     startTime = undefined;
     endTime = undefined;
-    cardContainer.innerHTML = '';
-    displayCards(deck);
+    displayCards(deck12);
 })
 
 let cardUp = '';
@@ -170,26 +129,8 @@ function flipCard(card) {
 
 function displayCards(deck) {
     let x = shuffleCards(deck);
+    cardContainer.innerHTML = '';
     x.forEach(cd => {
         makeCard(cd)
     })
 }
-
-
-
-// - listen for clicks on the cards
-// ## when a card is clicked
-// - if the timer has not been started, start the timer
-// - check how many unmatched cards are face-up, if 2 or more stop
-// - display its image
-// - if another card is clicked
-//   - check to see if the two cards' values match
-//   - if the two cards match
-//     - alert the user
-//     - remove/disable the cards
-//     - check if there are any unmatched cards left
-//       - if no, stop the timer, game over
-//   - if the two cards don't match
-//     - flip the unmatched cards face-down
-// ## every second
-// - display the timer
