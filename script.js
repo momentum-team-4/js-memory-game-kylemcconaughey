@@ -1,4 +1,3 @@
-
 let timer = document.querySelector('#timer');
 let records = document.querySelector('#records');
 let leaderboard = document.querySelector('#leaderboard');
@@ -9,18 +8,23 @@ let timeElapsed = document.querySelector('#timeElapsed');
 let averageTime = document.querySelector('#average');
 let runs = 0;
 let cumulative = 0;
+let dropdown = document.querySelector('#dropdown');
+let clearBtn = document.querySelector('#clearBtn');
+let resetBtn = document.querySelector('#resetBtn')
+let cardUp = '';
+let clearTimesBtn = document.querySelector('#clearTimes');
 
 window.addEventListener('load', function () {
     displayCards(deck12)
 })
 
-function start() {
-    if (startTime === undefined) {
-        startTime = moment()
-        console.log(startTime)
-    }
+function displayCards(deck) {
+    let x = shuffleCards(deck);
+    cardContainer.innerHTML = '';
+    x.forEach(cd => {
+        makeCard(cd)
+    })
 }
-
 
 function shuffleCards(deck) {
     deck = deck.slice()
@@ -32,7 +36,6 @@ function shuffleCards(deck) {
     }
     return deck
 }
-
 
 function makeCard(x) {
     let num = cardContainer.childElementCount;
@@ -56,17 +59,14 @@ function makeCard(x) {
     card.addEventListener('click', function () {
         flipCard(cardFront)
     })
-
 }
 
-let clearBtn = document.querySelector('#clearBtn');
-clearBtn.addEventListener('click', function () {
-    let temp = document.querySelectorAll('.faceup');
-    temp.forEach(el => {
-        el.classList.toggle('faceup')
-        el.classList.toggle('facedown')
-    })
-})
+function start() {
+    if (startTime === undefined) {
+        startTime = moment()
+        console.log(startTime)
+    }
+}
 
 function set() {
     console.log('set called')
@@ -81,22 +81,6 @@ function set() {
         displayCards(deck20)
     }
 }
-
-let resetBtn = document.querySelector('#resetBtn')
-resetBtn.addEventListener('click', function () {
-    console.log('resetbtn clicked')
-    let temp = document.querySelectorAll('.solved', '.faceup');
-    console.log('temp: ' + temp)
-    temp.forEach(el => {
-        el.classList.remove('faceup', 'solved')
-        el.classList.add('facedown')
-    })
-    startTime = undefined;
-    endTime = undefined;
-    set()
-})
-
-let cardUp = '';
 
 function flipCard(card) {
     if (!card.classList.contains('solved')) {
@@ -137,7 +121,7 @@ function flipCard(card) {
                     console.log('try again')
                     let temp = document.querySelectorAll('.faceup');
                     setTimeout(() => {
-                        console.log('timoeut')
+                        console.log('timeout')
                         temp.forEach(el => {
                             el.classList.toggle('faceup')
                             el.classList.toggle('facedown')
@@ -149,32 +133,27 @@ function flipCard(card) {
     }
 }
 
-function displayCards(deck) {
-    let x = shuffleCards(deck);
-    cardContainer.innerHTML = '';
-    x.forEach(cd => {
-        makeCard(cd)
+resetBtn.addEventListener('click', function () {
+    console.log('resetbtn clicked')
+    let temp = document.querySelectorAll('.solved', '.faceup');
+    console.log('temp: ' + temp)
+    temp.forEach(el => {
+        el.classList.remove('faceup', 'solved')
+        el.classList.add('facedown')
     })
-}
-
-const dropdown = document.querySelector('#dropdown');
-
-dropdown.addEventListener('input', function () {
-    console.log(dropdown.value)
-    if (dropdown.value === 1) {
-        displayCards(deck12)
-        console.log('value1')
-    } else if (dropdown.value === 2) {
-        displayCards(deck16)
-        console.log('value2')
-    } else if (dropdown.value === 3) {
-        displayCards(deck20)
-        console.log('value3')
-    }
-
+    startTime = undefined;
+    endTime = undefined;
+    set()
 })
 
-let clearTimesBtn = document.querySelector('#clearTimes');
+clearBtn.addEventListener('click', function () {
+    let temp = document.querySelectorAll('.faceup');
+    temp.forEach(el => {
+        el.classList.toggle('faceup')
+        el.classList.toggle('facedown')
+    })
+})
+
 clearTimesBtn.addEventListener('click', function () {
     timeElapsed.innerHTML = '';
     averageTime.innerHTML = 'Your average time is: '

@@ -32,7 +32,6 @@ body {
     background-color: #FAFAFA;
     border-radius: 20px;
     border: outset 0.5rem;
-
 }
 
 img {
@@ -58,10 +57,6 @@ img {
 
 .resetBtn {
     background-color: honeydew;
-}
-
-.solved {
-    box-shadow: aquamarine;
 }
 
 .card:hover {
