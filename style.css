@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+}
+
+body {
+    padding: 1rem;
+    background-color: aliceblue;
+}
+
+.dropdown {
+    width: 75px;
+    margin: 2rem;
+}
+
+.cardContainer {
+    display: flex;
+    flex-flow: wrap;
+    margin-right: 0;
+}
+.card {
+    width: 20%;
+    height: 200px;
+    margin: 1rem;
+    background-image: url('cardPics/momentum.png');
+    background-origin: padding-box;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color: #FAFAFA;
+    border-radius: 20px;
+    border: outset 0.5rem;
+}
+
+img {
+    border-radius: 20px;
+    box-shadow: 10px 10px 35px;
+    height: 180px;
+}
+
+.facedown {
+    display: none;
+}
+
+.resetBtn,
+#clearTimes,
+.clearBtn {
+    width: 25%;
+    height: 50px;
+    background-color: lightcoral;
+    border: outset 0.5rem;
+    font-size: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.resetBtn {
+    background-color: honeydew;
+}
+
+.card:hover {
+    border-color: lightsteelblue;
+}
+
+button:focus {
+    outline: 0;
+    box-shadow: inset 0px 0px 15px #232c33ff;
+}
+
+#average {
+    font-size: 3rem;
+    text-align: center;
+}
